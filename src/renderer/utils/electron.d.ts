@@ -5,9 +5,10 @@ declare global {
         loginWithSpotify: () => void;
         exchangeCode: (code) => Promise<any>;
         closeAuthWindow: () => Promise<any>
+        gettoken: () => Promise<any>
       };
     }
   }
   
-  export {}; // This is required to make the file a module
+  export {}; 
   
