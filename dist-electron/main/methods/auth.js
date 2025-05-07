@@ -51,3 +51,6 @@ export async function gettoken() {
     const token = store.get('token');
     return token;
 }
+export async function logout() {
+    store.delete('token');
+}

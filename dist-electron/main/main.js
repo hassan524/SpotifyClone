@@ -6,7 +6,7 @@ import { initializeIpcHandlers } from './IpcHandlers.js';
 function CreateMainWindow() {
     initializeIpcHandlers();
     const mainWindow = new BrowserWindow({
-        frame: true,
+        frame: false,
         width: 1920,
         height: 1080,
         resizable: false,

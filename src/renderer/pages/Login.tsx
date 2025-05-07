@@ -4,7 +4,7 @@ import bg from '../../../resources/bg.png';
 const Login = () => {
 
   const handleLogin = () => {
-    window.electronAPI.loginWithSpotify(); 
+    window.electronAPI.loginWithSpotify();
   };
 
   return (
@@ -26,10 +26,14 @@ const Login = () => {
           <p>Free on Spotify.</p>
         </div>
         <div className="">
-          <button onClick={handleLogin} className='bg-[#1ED760] text-[#121212] text-2xl cursor-pointer hover:scale-[1.05] hover:bg-[#87ffb1] transition ease-in-out w-48 rounded-4xl h-16 flex items-center justify-center gap-3'>
-            <span className='' style={{ fontWeight: 800 }}>Log in</span>
-            <i className="bi bi-box-arrow-up-right bold-icon"></i>
+          <button
+            onClick={handleLogin}
+            className="bg-[#22d661] text-[#121212] text-2xl font-extrabold cursor-pointer hover:scale-105 hover:bg-[#87ffb1] transition ease-in-out w-48 rounded-2xl h-16 flex items-center justify-center gap-3"
+          >
+            <span>Log in</span>
+            <i className="bi bi-box-arrow-up-right"></i>
           </button>
+
         </div>
 
         <div className="flex flex-col items-center gap-3">
