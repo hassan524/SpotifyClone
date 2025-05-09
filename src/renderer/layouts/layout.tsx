@@ -2,17 +2,18 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import LeftSidebar from '../components/LeftSidebar'
+import MainContainer from '../components/MainContainer'
 
 const Layout = () => {
   return (
     <div className="h-screen w-screen overflow-hidden">
       <Navbar />
-      <div className="m-6">
-      <div className="flex h-[80vh]">
+      <div className="mx-6">
+      <div className="flex gap-4 h-[80vh]">
         <LeftSidebar />
-        <div className="flex-1 overflow-auto">
+        <MainContainer>
           <Outlet />
-        </div>
+        </MainContainer>
       </div>
       </div>
     </div>

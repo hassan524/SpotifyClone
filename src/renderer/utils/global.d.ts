@@ -12,6 +12,8 @@ declare global {
 
       minimizeWindow: () => Promise<any>;
       closeWindow:  () => Promise<any>
+
+      getplaylist: () => Promise<any>
     };
   }
 }
