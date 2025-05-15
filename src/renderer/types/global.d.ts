@@ -1,5 +1,4 @@
 // global.d.ts
-
 export {};
 
 declare global {
@@ -14,6 +13,8 @@ declare global {
       closeWindow:  () => Promise<any>
 
       getplaylist: () => Promise<any>
+      getsongs: (id: string) => Promise<any>
+      getSingleplaylist: (playlistid: string) => Promise<any>
     };
   }
 }

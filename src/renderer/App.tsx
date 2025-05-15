@@ -5,6 +5,7 @@ import Callback from './pages/Callback';
 import Layout from './layouts/layout';
 import Home from './pages/Home';
 import { useAppContext } from './context/context';
+import Playlists from './pages/Playlists';
 
 function App() {
   const isDev = import.meta.env.MODE === 'development';
@@ -21,6 +22,8 @@ function App() {
           element={Token ? <Layout /> : <Navigate to="/auth" replace />}
         >
           <Route index element={<Home />} />
+          <Route path='/playlist/:id' element={<Playlists />} />
+          
         </Route>
 
         <Route

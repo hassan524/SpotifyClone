@@ -3,5 +3,11 @@
   "references": [
     { "path": "./tsconfig.electron.json" },
     { "path": "./tsconfig.web.json" }
-  ]
+  ],
+    "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/renderer/*"]
+    }
+  }
 }

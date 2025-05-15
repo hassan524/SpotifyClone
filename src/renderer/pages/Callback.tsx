@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import  { use, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAppContext } from '../context/context';
 
 const Callback = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const [token, settoken] = useState()
+  const {SetToken} = useAppContext()
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
@@ -14,7 +15,7 @@ const Callback = () => {
 
       try {
         const res = await window.electronAPI.exchangeCode(code);
-        await settoken(res)
+        await SetToken(res)
         window.electronAPI.closeAuthWindow();
       } catch {
       } finally {

@@ -8,7 +8,7 @@ function CreateMainWindow() {
   initializeIpcHandlers(); 
 
   const mainWindow = new BrowserWindow({
-    frame: false,
+    frame: true,
     width: 1920,
     height: 1080,
     resizable: false,

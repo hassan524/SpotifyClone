@@ -12,8 +12,6 @@ export async function fetchSpotifyAPI(url: string): Promise<any> {
     headers: { Authorization: `Bearer ${token.access_token}` }
   });
 
-
-
   if (res.status === 401) {
     await refreshAccessToken();
     token = store.get('token') as SpotifyTokenResponse;
@@ -22,7 +20,6 @@ export async function fetchSpotifyAPI(url: string): Promise<any> {
       headers: { Authorization: `Bearer ${token.access_token}` }
     });
 
-    console.log('here res', res)
   }
 
   return res.json();

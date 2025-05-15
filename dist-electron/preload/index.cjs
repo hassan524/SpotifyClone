@@ -9,5 +9,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     logout: () => ipcRenderer.invoke('logout'),
     minimizeWindow: () => ipcRenderer.invoke('minimize'),
     closeWindow: () => ipcRenderer.invoke('closeWindow'),
-    getplaylist: () => ipcRenderer.invoke('getplaylist')
+    getplaylist: () => ipcRenderer.invoke('getplaylist'),
+    getsongs: (id) => ipcRenderer.invoke('getsongs', id),
+    getSingleplaylist: (playlistid) => ipcRenderer.invoke('getSingleplaylist', playlistid)
 });

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const MainContainer = ({ children }) => {
+const MainContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex-1 overflow-auto bg-[#121212] p-4 text-white rounded-lg">
+    <div className="h-[80vh] w-full bg-[#121212] text-white rounded-lg overflow-y-scroll">
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default MainContainer
+export default MainContainer;

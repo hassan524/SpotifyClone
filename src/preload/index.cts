@@ -10,5 +10,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     minimizeWindow: () => ipcRenderer.invoke('minimize'),
     closeWindow: () => ipcRenderer.invoke('closeWindow'),
 
-    getplaylist: () => ipcRenderer.invoke('getplaylist')
+    getplaylist: () => ipcRenderer.invoke('getplaylist'),
+    getsongs: (id: string) => ipcRenderer.invoke('getsongs', id),
+    getSingleplaylist: (playlistid: string) => ipcRenderer.invoke('getSingleplaylist', playlistid)
 });
