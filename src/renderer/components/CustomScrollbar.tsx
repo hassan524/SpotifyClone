@@ -1,35 +1,34 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 
-const CustomScrollbar = ({ children }) => {
+const CustomScrollbar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Scrollbars
       autoHide
+      style={{ height: '100%' }} 
       renderTrackVertical={({ style, ...props }) => (
         <div
           {...props}
           style={{
             ...style,
-            width: '1.1rem',
+            width: '1rem',
             right: 0,
             top: 0,
             bottom: 0,
-            backgroundColor: '#2a2a2a',
+            backgroundColor: 'transparent',
           }}
         />
       )}
-      renderThumbVertical={({ style, ...props }) => (
-        <div
-          {...props}
-          style={{
-            ...style,
-            backgroundColor: '#555',
-            borderRadius: '6px',
-            // minHeight: '30px',  // 👈 this limits how tall the thumb *can be*
-            // maxHeight: '40px',  // 👈 optional: limit it further
-          }}
-        />
-      )}
+ renderThumbVertical={({ style, ...props }) => (
+  <div
+    {...props}
+    style={{
+      ...style,
+      backgroundColor: 'rgba(85, 85, 85, 0.4)', // dark gray with 40% opacity
+    }}
+  />
+)}
+
     >
       {children}
     </Scrollbars>

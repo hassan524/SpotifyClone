@@ -9,12 +9,13 @@ const Layout = () => {
     <div className="h-screen w-screen overflow-hidden">
       <Navbar />
       <div className="mx-6">
-      <div className="flex gap-4 h-[80vh]">
-        <LeftSidebar />
-        <MainContainer>
-          <Outlet />
-        </MainContainer>
-      </div>
+        <div className="flex gap-4 h-[80vh]">
+          <LeftSidebar />
+          <MainContainer>
+            <Outlet />
+          </MainContainer>
+          
+        </div>
       </div>
     </div>
   )

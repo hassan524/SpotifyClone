@@ -61,8 +61,8 @@ export async function getSongs(playlistId: string) {
     
 
     return {
-      playlist,
       songs,
+      data
     };
   } catch (err: any) {
     console.error('Error fetching songs:', err);

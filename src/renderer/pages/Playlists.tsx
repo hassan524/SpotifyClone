@@ -20,10 +20,9 @@ const Playlists = () => {
   }, [id]);
 
   return (
-    <div className="h-full flex flex-col relative">
+    <div className="h-full flex flex-col z-50">
       <PlaylistHeader top1={top1} top2={top2} bottom={bottom} />
       <PlaylistSongs bottom={bottom} />
-      <div className="bg-[#181818] w-full h-[16vh] absolute bottom-0 border-t border-[#282828]" />
     </div>
   );
 };
