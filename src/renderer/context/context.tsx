@@ -1,26 +1,28 @@
 'use client';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-// Define the shape of context
 interface AppContextType {
   Token: string;
   SetToken: (token: string) => void;
   loading: boolean;
   setloading: (loading: boolean) => void;
+  CurrentSong: string,
+  SetCurrentSong: (url: string) => void
 }
 
-// Create context with default values
 const AppContext = createContext<AppContextType>({
   Token: '',
   SetToken: () => {},
   loading: false,
   setloading: () => {},
+  CurrentSong: '',
+  SetCurrentSong: () => {}
 });
 
-// Provider component
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [Token, SetToken] = useState('');
   const [loading, setloading] = useState(false);
+  const [CurrentSong, SetCurrentSong] = useState(null)
 
   React.useEffect(() => {
     const gettoken = async () => {
@@ -32,7 +34,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ Token, SetToken, loading, setloading }}>
+    <AppContext.Provider value={{ Token, SetToken, loading, setloading, CurrentSong, SetCurrentSong }}>
       {children}
     </AppContext.Provider>
   );

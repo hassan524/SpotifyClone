@@ -1,8 +1,8 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import LeftSidebar from '../components/LeftSidebar'
 import MainContainer from '../components/MainContainer'
+import PlaySong from '@/components/PlaySong'
 
 const Layout = () => {
   return (
@@ -17,6 +17,7 @@ const Layout = () => {
           
         </div>
       </div>
+      <PlaySong />
     </div>
   )
 }

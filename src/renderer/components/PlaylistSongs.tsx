@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppContext } from '../context/context';
 import SearchToggle from './SeachToggle';
-import { Skeleton } from './ui/skeleton';
 import { TracksSkeleton } from './Skeletons';
 
 interface Song {
@@ -18,7 +17,7 @@ interface Props {
 }
 
 const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
-    const { loading, setloading } = useAppContext();
+    const { loading, setloading, SetCurrentSong } = useAppContext();
     const { id } = useParams();
     const [tracks, setTracks] = useState<Song[]>([]);
 
@@ -69,7 +68,7 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                             <div className="w-[5%] relative text-[#978E96]">
                                 <span className='group-hover:hidden'>{index + 1}</span>
                                 <div className="absolute left-0 top-[50%] translate-y-[-50%] flex items-center justify-center transition-all duration-75 group-hover:bottom-0 bottom-[-30px] opacity-0 group-hover:opacity-100">
-                                    <i className="bi bi-play-fill text-5xl"></i>
+                                    <i className="bi bi-play-fill text-5xl" onClick={() => SetCurrentSong(song.previewUrl[0])}></i>
                                 </div>
                             </div>
 
