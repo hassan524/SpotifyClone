@@ -1,4 +1,4 @@
-import  { use, useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/context';
 
@@ -27,7 +27,7 @@ const Callback = () => {
   }, [location]);
 
   return (
-    <div className="h-screen w-screen bg-[#1DB954] flex items-center justify-center">
+    <div className="h-screen w-screen bg-black flex items-center justify-center">
       {loading && (
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
       )}

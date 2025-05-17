@@ -4,6 +4,7 @@ import { useAppContext } from '../context/context';
 import SearchToggle from './SeachToggle';
 import { TracksSkeleton } from './Skeletons';
 
+
 interface Song {
     duration: number;
     image: string;
@@ -17,9 +18,11 @@ interface Props {
 }
 
 const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
-    const { loading, setloading, SetCurrentSong } = useAppContext();
+    const { loading, setloading, SetCurrentSong, CurrentSong } = useAppContext();
     const { id } = useParams();
     const [tracks, setTracks] = useState<Song[]>([]);
+    const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
+
 
     useEffect(() => {
         (async () => {
@@ -63,12 +66,18 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                     tracks?.map((song, index) => (
                         <div
                             key={index}
-                            className="flex items-center gap-6 py-3 text-2xl px-4 group hover:bg-white/5 transition rounded"
+                            onClick={() => setSelectedIndex(index)} // Set selected on click
+                            className={`flex items-center gap-6 py-3 text-2xl px-4 group hover:bg-white/5 transition rounded cursor-pointer ${selectedIndex === index ? 'bg-white/5' : ''
+                                }`}
                         >
                             <div className="w-[5%] relative text-[#978E96]">
                                 <span className='group-hover:hidden'>{index + 1}</span>
                                 <div className="absolute left-0 top-[50%] translate-y-[-50%] flex items-center justify-center transition-all duration-75 group-hover:bottom-0 bottom-[-30px] opacity-0 group-hover:opacity-100">
-                                    <i className="bi bi-play-fill text-5xl" onClick={() => SetCurrentSong(song.previewUrl[0])}></i>
+                                    {CurrentSong ? (
+                                        <i className="bi bi-pause-fill hover:scale-[1.01] transition text-5xl" onClick={() => SetCurrentSong('')}></i>
+
+                                    ) : <i className="bi bi-play-fill hover:scale-[1.01] transition text-5xl" onClick={() => SetCurrentSong(song.previewUrl[0])}></i>}
+
                                 </div>
                             </div>
 

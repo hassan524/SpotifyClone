@@ -1,45 +1,33 @@
-import { useAppContext } from '@/context/context';
+import React, { useEffect, useRef } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { useAppContext } from '@/context/context';
 
+// Step 1: Add proper ref typing
 const PlaySong = () => {
-  const { CurrentSong } = useAppContext()
+  const { CurrentSong } = useAppContext();
+
+  const audioRef = useRef<AudioPlayer>(null); // ✅ Tell TypeScript it's a ref to AudioPlayer
+
+  useEffect(() => {
+    if (CurrentSong === '') {
+      const audioEl = audioRef.current?.audio?.current;
+      if (audioEl) {
+        audioEl.pause();
+        audioEl.currentTime = 0;
+      }
+    }
+  }, [CurrentSong]);
+
   return (
-    <div className="bg-[#000000] h-[10vh] text-white flex items-center justify-between px-6">
-
-      {/* Left: Track Info (optional placeholder) */}
-      <div className="w-1/4">
-        {/* You can add image + name later */}
-        <p className="text-sm text-gray-400">No song playing</p>
-      </div>
-
-      {/* Center: Play Controls */}
-      <div className="w-2/4 flex flex-col items-center">
-        {/* Play Button */}
-        <button className="text-white text-4xl hover:text-green-500">
-          <i className="bi bi-play-circle-fill"></i>
-        </button>
-
-        {/* Duration Below */}
-        <div className="text-xs text-gray-400 mt-1">
-          {/* <audio
-  autoPlay
-  controls
-  controlsList="nodownload noplaybackrate nosound"
-  className="hidden" // hides the default audio UI
-  src={currentSong.preview_url}
-/> */}
-        </div>
-      </div>
-
-      {/* Right: Volume Control */}
-      <div className="w-1/4 flex justify-end items-center space-x-1">
-        <i className="bi bi-volume-down text-xl"></i>
-        <input
-          type="range"
-          className="w-[12rem] h-[23px] accent-white outline-none"
-          min="0"
-          max="100"
+    <div className="bg-[#000000] h-[10vh] text-white flex items-center justify-center px-6">
+      <div className="w-[70rem]">
+        <AudioPlayer
+          ref={audioRef}
+          src={CurrentSong}
+          volume={0.5}
+          autoPlay
+          showJumpControls={false}
         />
       </div>
     </div>

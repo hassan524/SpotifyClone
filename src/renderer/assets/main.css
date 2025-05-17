@@ -73,25 +73,35 @@ body{
   /* background-color: red; */
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  /* background: none !important;  Remove default background image  */
-  width: auto !important;       
-  /* height: auto !important; */
-  color: inherit !important;    
-  opacity: 1 !important;         /* Keep your icon visible */
-}
+/* Change all buttons and volume/progress indicators color */
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  content: none !important;    /* Remove default Swiper pseudo element */
-}
-
-.scrollbar::-webkit-scrollbar-button {
+.rhap_volume-controls, .rhap_additional-controls {
   display: none !important;
-  height: 0 !important;
-  width: 0 !important;
 }
+
+.rhap_controls-section {
+  justify-content: center !important;
+}
+.rhap_play-pause-button {
+  font-size: 2.5rem !important; /* You can increase this as needed */
+}
+
+/* Change player background color */
+.rhap_container {
+  background-color: #000 !important; /* black background, for example */
+}
+
+/* Change font color of current time and duration */
+.rhap_time {
+  color: #4D4D4D !important;
+}
+
+/* Change font family */
+.rhap_time,
+.rhap_controls-section {
+  font-family: 'Arial', sans-serif !important;
+}
+
 
 /* ---break---  */
 
