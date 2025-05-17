@@ -12,7 +12,6 @@ function App() {
   const Router = isDev ? BrowserRouter : HashRouter;
 
   const { Token } = useAppContext();
-  console.log(Token)
 
   return (
     <Router>

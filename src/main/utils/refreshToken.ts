@@ -27,7 +27,6 @@ export async function refreshAccessToken() {
 
   const data = await res.json() as SpotifyTokenResponse;
 
-  console.log('here refresh token', data)
 
   if (data.access_token) {
     store.set('token', {

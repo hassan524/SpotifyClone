@@ -6,7 +6,7 @@ let authWindow = null;
 const store = new Store();
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const redirectUri = 'https://myapp:3000/callback';
-const scope = 'user-read-private user-read-email';
+const scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 export function loginWithSpotify() {
     const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;

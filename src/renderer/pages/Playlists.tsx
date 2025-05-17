@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import PlaylistHeader from '../components/PlaylistHeader';
 import themes from '../utils/theme';
 import PlaylistSongs from '../components/PlaylistSongs';
+import ScrollNavbar from '@/components/AnimatedNavbar';
 
 const Playlists = () => {
 
@@ -20,7 +21,7 @@ const Playlists = () => {
   }, [id]);
 
   return (
-    <div className="h-full flex flex-col z-50">
+    <div className="h-full flex flex-col">
       <PlaylistHeader top1={top1} top2={top2} bottom={bottom} />
       <PlaylistSongs bottom={bottom} />
     </div>

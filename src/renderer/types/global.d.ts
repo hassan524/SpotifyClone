@@ -15,6 +15,13 @@ declare global {
       getplaylist: () => Promise<any>
       getsongs: (id: string) => Promise<any>
       getSingleplaylist: (playlistid: string) => Promise<any>
+
+      FetchTopArtist: () => Promise<any>
+      FetchTopSongs: () => Promise<any>
+      FetchRecentPLays: () => Promise<any>
+      FetchNewReleases: () => Promise<any>
+      fetchArtistById: (url: string) => Promise<any>
+      
     };
   }
 }

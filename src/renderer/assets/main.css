@@ -60,6 +60,33 @@ body{
   align-items: center;
 }
 
+.home::after {
+  content: '';
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)); 
+  /* background-color: red; */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  /* background: none !important;  Remove default background image  */
+  width: auto !important;       
+  /* height: auto !important; */
+  color: inherit !important;    
+  opacity: 1 !important;         /* Keep your icon visible */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: none !important;    /* Remove default Swiper pseudo element */
+}
+
 .scrollbar::-webkit-scrollbar-button {
   display: none !important;
   height: 0 !important;

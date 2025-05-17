@@ -64,11 +64,15 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                     tracks?.map((song, index) => (
                         <div
                             key={index}
-                            className="flex items-center gap-6 py-3 text-2xl px-4 hover:bg-white/5 transition rounded"
+                            className="flex items-center gap-6 py-3 text-2xl px-4 group hover:bg-white/5 transition rounded"
                         >
-                            <div className="w-[5%] text-[#978E96]">
-                                <span>{index + 1}</span>
+                            <div className="w-[5%] relative text-[#978E96]">
+                                <span className='group-hover:hidden'>{index + 1}</span>
+                                <div className="absolute left-0 top-[50%] translate-y-[-50%] flex items-center justify-center transition-all duration-75 group-hover:bottom-0 bottom-[-30px] opacity-0 group-hover:opacity-100">
+                                    <i className="bi bi-play-fill text-5xl"></i>
+                                </div>
                             </div>
+
                             <div className="w-[50%] flex gap-4">
                                 <img
                                     className="h-[70px] w-[70px] rounded-md"
@@ -96,7 +100,7 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                     ))
                 ) : (
                     Array.from({ length: 10 }).map((_, index) => (
-                        <TracksSkeleton/>
+                        <TracksSkeleton />
                     ))
                 )}
 

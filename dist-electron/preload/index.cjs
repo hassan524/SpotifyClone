@@ -11,5 +11,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
     closeWindow: () => ipcRenderer.invoke('closeWindow'),
     getplaylist: () => ipcRenderer.invoke('getplaylist'),
     getsongs: (id) => ipcRenderer.invoke('getsongs', id),
-    getSingleplaylist: (playlistid) => ipcRenderer.invoke('getSingleplaylist', playlistid)
+    getSingleplaylist: (playlistid) => ipcRenderer.invoke('getSingleplaylist', playlistid),
+    FetchTopArtist: () => ipcRenderer.invoke('FetchTopArtist'),
+    FetchTopSongs: () => ipcRenderer.invoke('FetchTopSongs'),
+    FetchRecentPLays: () => ipcRenderer.invoke('FetchRecentPLays'),
+    FetchNewReleases: () => ipcRenderer.invoke('FetchNewReleases'),
+    fetchArtistById: (url) => ipcRenderer.invoke('fetchArtistById', url),
 });

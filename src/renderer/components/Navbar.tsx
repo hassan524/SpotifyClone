@@ -1,13 +1,18 @@
-import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const IsHome = location.pathname === '/'; 
+
   return (
     <nav className='h-[10vh] bg-[#000000] flex justify-between items-center px-8'>
 
       <div className="left flex items-center gap-6">
         <i className="bi bi-three-dots text-[#FFFFFF] text-4xl cursor-pointer hover:text-slate-100"></i>
         <div className="flex items-center text-3xl">
-          <i className="bi bi-chevron-left text-[#363636]"></i>
+          <i className={`bi bi-chevron-left ${IsHome ? 'text-[#363636]' : 'text-white cursor-pointer active:text-[#363636]'}`} onClick={() => navigate(-1)}></i>
           <i className="bi bi-chevron-right text-[#363636]"></i>
         </div>
         <i className="bi bi-house-door-fill text-3xl text-white bg-[#1F1F1F] p-3 rounded-full inline-flex"></i>
