@@ -2,6 +2,7 @@ import { BrowserWindow, app } from 'electron';
 import fetch from 'node-fetch';
 import path from 'path';
 import Store from 'electron-store';
+let mainWindow = null; // make sure to assign this in your app
 let authWindow = null;
 const store = new Store();
 const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -37,12 +38,16 @@ export async function exchangeCodeForToken(_, code) {
         });
         const data = (await res.json());
         store.set('token', data);
+        mainWindow?.webContents.send('token', data);
         return data;
     }
     catch (error) {
         console.error('Error during token exchange:', error);
         throw error;
     }
+}
+export function setMainWindow(win) {
+    mainWindow = win;
 }
 export function closeAuthWindow() {
     authWindow?.close();

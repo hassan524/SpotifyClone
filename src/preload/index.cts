@@ -19,4 +19,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
     FetchRecentPLays: () => ipcRenderer.invoke('FetchRecentPLays'),
     FetchNewReleases: () => ipcRenderer.invoke('FetchNewReleases'),
     fetchArtistById: (url: string) => ipcRenderer.invoke('fetchArtistById', url),
+
+    onToken: (callback: (token: any) => void) => {
+        ipcRenderer.on('token', (_event: any, token: any) => callback(token));
+    },
 });

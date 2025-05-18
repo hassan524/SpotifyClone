@@ -1,11 +1,12 @@
-import  { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/context';
 
 const Callback = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const {SetToken} = useAppContext()
+  const { SetToken, Token } = useAppContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
@@ -15,9 +16,10 @@ const Callback = () => {
 
       try {
         const res = await window.electronAPI.exchangeCode(code);
-        await SetToken(res)
-        window.electronAPI.closeAuthWindow();
-      } catch {
+        await window.electronAPI.closeAuthWindow();
+        await SetToken(res); 
+      } catch (err) {
+        console.error('Token exchange failed:', err);
       } finally {
         setLoading(false);
       }

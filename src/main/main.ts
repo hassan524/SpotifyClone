@@ -2,13 +2,12 @@ import 'dotenv/config';
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
-import { initializeIpcHandlers } from './IpcHandlers.js'; 
+import { initializeIpcHandlers } from './IpcHandlers.js';
 
 function CreateMainWindow() {
-  initializeIpcHandlers(); 
 
   const mainWindow = new BrowserWindow({
-    frame: false,
+    frame: true,
     width: 1920,
     height: 1080,
     resizable: false,
@@ -18,6 +17,9 @@ function CreateMainWindow() {
       nodeIntegration: false,
     },
   });
+
+  initializeIpcHandlers(mainWindow);
+
 
   if (!isDev) {
     mainWindow.loadFile(path.join(app.getAppPath(), 'dist-react/index.html'));

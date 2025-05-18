@@ -4,7 +4,6 @@ import path from 'path';
 import isDev from 'electron-is-dev';
 import { initializeIpcHandlers } from './IpcHandlers.js';
 function CreateMainWindow() {
-    initializeIpcHandlers();
     const mainWindow = new BrowserWindow({
         frame: true,
         width: 1920,
@@ -16,6 +15,7 @@ function CreateMainWindow() {
             nodeIntegration: false,
         },
     });
+    initializeIpcHandlers(mainWindow);
     if (!isDev) {
         mainWindow.loadFile(path.join(app.getAppPath(), 'dist-react/index.html'));
     }

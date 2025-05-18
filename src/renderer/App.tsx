@@ -6,15 +6,22 @@ import Layout from './layouts/layout';
 import Home from './pages/Home';
 import { useAppContext } from './context/context';
 import Playlists from './pages/Playlists';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
-  const isDev = import.meta.env.MODE === 'development';
-  const Router = isDev ? BrowserRouter : HashRouter;
+
+  const navigate = useNavigate()
 
   const { Token } = useAppContext();
 
+    React.useEffect(() => {
+      console.log('here token bud', Token)
+    if (Token) {
+      navigate('/');
+    }
+  }, [Token]);
+
   return (
-    <Router>
       <Routes>
         <Route
           path="/"
@@ -32,7 +39,6 @@ function App() {
 
         <Route path="/callback" element={<Callback />} />
       </Routes>
-    </Router>
   );
 }
 

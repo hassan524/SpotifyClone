@@ -3,11 +3,10 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { useAppContext } from '@/context/context';
 
-// Step 1: Add proper ref typing
 const PlaySong = () => {
   const { CurrentSong } = useAppContext();
 
-  const audioRef = useRef<AudioPlayer>(null); // ✅ Tell TypeScript it's a ref to AudioPlayer
+  const audioRef = useRef<AudioPlayer>(null);
 
   useEffect(() => {
     if (CurrentSong === '') {
@@ -24,10 +23,11 @@ const PlaySong = () => {
       <div className="w-[70rem]">
         <AudioPlayer
           ref={audioRef}
-          src={CurrentSong}
+          src={CurrentSong!}
           volume={0.5}
           autoPlay
           showJumpControls={false}
+          preload="metadata"
         />
       </div>
     </div>

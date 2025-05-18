@@ -1,28 +1,31 @@
 'use client';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface AppContextType {
   Token: string;
   SetToken: (token: string) => void;
   loading: boolean;
   setloading: (loading: boolean) => void;
-  CurrentSong: string,
-  SetCurrentSong: (url: string) => void
+  CurrentSong: string | null;
+  SetCurrentSong: (url: string | null) => void;
 }
-
 const AppContext = createContext<AppContextType>({
   Token: '',
-  SetToken: () => {},
+  SetToken: () => { },
   loading: false,
-  setloading: () => {},
+  setloading: () => { },
   CurrentSong: '',
-  SetCurrentSong: () => {}
+  SetCurrentSong: () => { }
 });
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
+
   const [Token, SetToken] = useState('');
   const [loading, setloading] = useState(false);
-  const [CurrentSong, SetCurrentSong] = useState(null)
+  const [CurrentSong, SetCurrentSong] = useState<string | null>(null);
+
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     const gettoken = async () => {
@@ -33,6 +36,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     gettoken();
   }, []);
 
+   React.useEffect(() => {
+    window.electronAPI.onToken((newToken) => {
+      SetToken(newToken);
+    });
+
+    window.electronAPI.gettoken().then((storedToken) => {
+      if (storedToken) SetToken(storedToken);
+    });
+  }, []);
+
+
+
+
   return (
     <AppContext.Provider value={{ Token, SetToken, loading, setloading, CurrentSong, SetCurrentSong }}>
       {children}
@@ -40,5 +56,4 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook to use the context
 export const useAppContext = () => useContext(AppContext);

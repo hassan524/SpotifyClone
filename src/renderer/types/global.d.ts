@@ -8,6 +8,7 @@ declare global {
       exchangeCode: (code: string) => Promise<any>;
       closeAuthWindow: () => Promise<void>;
       gettoken: () => Promise<string | any>;
+      logout: () => void
 
       minimizeWindow: () => Promise<any>;
       closeWindow:  () => Promise<any>

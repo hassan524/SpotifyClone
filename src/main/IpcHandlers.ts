@@ -1,10 +1,12 @@
-import { ipcMain } from "electron";
-import { loginWithSpotify, exchangeCodeForToken, closeAuthWindow, gettoken, logout } from "./methods/auth.js";
+import { ipcMain, BrowserWindow } from "electron";
+import { loginWithSpotify, exchangeCodeForToken, closeAuthWindow, gettoken, logout, setMainWindow } from "./methods/auth.js";
 import { minimize, closeWindow } from "./methods/windows.js";
 import { getPlaylists, getSongs, getPlaylist } from "./methods/playlists.js";
 import { FetchTopArtist, FetchTopSongs, FetchRecentPLays, FetchNewReleases, fetchArtistById } from "./methods/services.js";
 
-export function initializeIpcHandlers(): void {
+export function initializeIpcHandlers(mainWindow: BrowserWindow): void {
+
+    setMainWindow(mainWindow)
 
     ipcMain.handle('login-with-spotify', loginWithSpotify);
     ipcMain.handle('spotify-exchange-code', exchangeCodeForToken);

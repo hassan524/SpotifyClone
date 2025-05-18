@@ -1,9 +1,10 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, ipcMain } from 'electron';
 import fetch from 'node-fetch';
-import path from 'path'
+import path from 'path';
 import Store from 'electron-store';
 import SpotifyTokenResponse from '../utils/data.js';
 
+let mainWindow: BrowserWindow | null = null; // make sure to assign this in your app
 let authWindow: BrowserWindow | null = null;
 const store = new Store();
 
@@ -13,7 +14,6 @@ const scope = 'user-read-private user-read-email user-top-read user-read-recentl
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;
 
 export function loginWithSpotify() {
-
   const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri
   )}&scope=${encodeURIComponent(scope)}`;
@@ -31,7 +31,6 @@ export function loginWithSpotify() {
 }
 
 export async function exchangeCodeForToken(_: any, code: string) {
-
   try {
     const res = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -51,23 +50,28 @@ export async function exchangeCodeForToken(_: any, code: string) {
     const data = (await res.json()) as SpotifyTokenResponse;
     store.set('token', data);
 
-    return data;
+    mainWindow?.webContents.send('token', data);
 
+    return data;
   } catch (error) {
     console.error('Error during token exchange:', error);
     throw error;
   }
 }
 
+export function setMainWindow(win: BrowserWindow) {
+  mainWindow = win;
+}
+
 export function closeAuthWindow() {
-  authWindow?.close()
+  authWindow?.close();
 }
 
 export async function gettoken() {
-  const token = store.get('token')
-  return token
+  const token = store.get('token');
+  return token;
 }
 
 export async function logout() {
-  store.delete('token')
+  store.delete('token');
 }
