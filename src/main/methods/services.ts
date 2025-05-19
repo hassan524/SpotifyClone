@@ -51,3 +51,13 @@ export async function fetchArtistById(urls: string) {
         console.error('Error fetching artist info:', error);
     }
 }
+
+export async function Me() {
+    const url = 'https://api.spotify.com/v1/me';
+    try {
+        const data = await fetchSpotifyAPI(url)
+        return data
+    } catch (error) {
+        console.log('error fetching FetchCountryPlaylists', error)
+    }
+}

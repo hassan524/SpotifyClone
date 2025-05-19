@@ -5,7 +5,7 @@ import isDev from 'electron-is-dev';
 import { initializeIpcHandlers } from './IpcHandlers.js';
 function CreateMainWindow() {
     const mainWindow = new BrowserWindow({
-        frame: true,
+        frame: false,
         width: 1920,
         height: 1080,
         resizable: false,

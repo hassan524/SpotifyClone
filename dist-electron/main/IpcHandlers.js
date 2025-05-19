@@ -2,7 +2,7 @@ import { ipcMain } from "electron";
 import { loginWithSpotify, exchangeCodeForToken, closeAuthWindow, gettoken, logout, setMainWindow } from "./methods/auth.js";
 import { minimize, closeWindow } from "./methods/windows.js";
 import { getPlaylists, getSongs, getPlaylist } from "./methods/playlists.js";
-import { FetchTopArtist, FetchTopSongs, FetchRecentPLays, FetchNewReleases, fetchArtistById } from "./methods/services.js";
+import { FetchTopArtist, FetchTopSongs, FetchRecentPLays, FetchNewReleases, fetchArtistById, Me } from "./methods/services.js";
 export function initializeIpcHandlers(mainWindow) {
     setMainWindow(mainWindow);
     ipcMain.handle('login-with-spotify', loginWithSpotify);
@@ -20,4 +20,5 @@ export function initializeIpcHandlers(mainWindow) {
     ipcMain.handle('FetchRecentPLays', FetchRecentPLays);
     ipcMain.handle('FetchNewReleases', FetchNewReleases);
     ipcMain.handle('fetchArtistById', (_e, url) => fetchArtistById(url));
+    ipcMain.handle('me', Me);
 }

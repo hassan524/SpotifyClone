@@ -1,6 +1,5 @@
 'use client';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface AppContextType {
   Token: string;
@@ -9,48 +8,62 @@ interface AppContextType {
   setloading: (loading: boolean) => void;
   CurrentSong: string | null;
   SetCurrentSong: (url: string | null) => void;
+  ProfileInfo: any;
+  SetProfileInfo: (info: any) => void;
 }
+
 const AppContext = createContext<AppContextType>({
   Token: '',
-  SetToken: () => { },
+  SetToken: () => {},
   loading: false,
-  setloading: () => { },
+  setloading: () => {},
   CurrentSong: '',
-  SetCurrentSong: () => { }
+  SetCurrentSong: () => {},
+  ProfileInfo: '',
+  SetProfileInfo: () => {}
 });
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-
   const [Token, SetToken] = useState('');
+  const [ProfileInfo, SetProfileInfo] = useState(null);
   const [loading, setloading] = useState(false);
   const [CurrentSong, SetCurrentSong] = useState<string | null>(null);
 
-  const navigate = useNavigate()
-
   React.useEffect(() => {
-    const gettoken = async () => {
-      const token = await window.electronAPI.gettoken();
-      console.log(token);
-      SetToken(token);
-    };
-    gettoken();
-  }, []);
+    const init = async () => {
+      try {
+        const token = await window.electronAPI.gettoken();
+        console.log('Stored token:', token);
+        if (token) SetToken(token);
 
-   React.useEffect(() => {
+        const info = await window.electronAPI.me();
+        SetProfileInfo(info)
+      } catch (err) {
+        console.error('Error initializing token/user info:', err);
+      }
+    };
+
+    init();
+
     window.electronAPI.onToken((newToken) => {
+      console.log('New token received:', newToken);
       SetToken(newToken);
     });
-
-    window.electronAPI.gettoken().then((storedToken) => {
-      if (storedToken) SetToken(storedToken);
-    });
   }, []);
 
-
-
-
   return (
-    <AppContext.Provider value={{ Token, SetToken, loading, setloading, CurrentSong, SetCurrentSong }}>
+    <AppContext.Provider
+      value={{
+        Token,
+        SetToken,
+        loading,
+        setloading,
+        CurrentSong,
+        SetCurrentSong,
+        ProfileInfo,
+        SetProfileInfo
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

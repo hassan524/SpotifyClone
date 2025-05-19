@@ -46,13 +46,11 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                 backgroundImage: `linear-gradient(to bottom, ${bottom} 0%, ${bottom} 1%, #121212 100%)`,
             }}
         >
-            {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <i className="bi bi-play-circle-fill text-[5rem] text-[#3BE477]"></i>
                 <SearchToggle />
             </div>
 
-            {/* Table Header */}
             <div className="flex gap-6 text-[22px] font-bold text-[#978E96] border-b border-[#452541] pb-5 px-4">
                 <div className="w-[5%]"><span>#</span></div>
                 <div className="w-[50%] "><span>Title</span></div>
@@ -60,13 +58,12 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                 <div className="w-[13%] flex justify-end"><span><i className="bi bi-alarm"></i></span></div>
             </div>
 
-            {/* Song Rows */}
             <div className="mt-2">
                 {!loading ? (
                     tracks?.map((song, index) => (
                         <div
                             key={index}
-                            onClick={() => setSelectedIndex(index)} // Set selected on click
+                            onClick={() => setSelectedIndex(index)} 
                             className={`flex items-center gap-6 py-3 text-2xl px-4 group hover:bg-white/5 transition rounded cursor-pointer ${selectedIndex === index ? 'bg-white/5' : ''
                                 }`}
                         >
@@ -76,7 +73,7 @@ const PlaylistSongs: React.FC<Props> = ({ bottom }) => {
                                     {CurrentSong ? (
                                         <i className="bi bi-pause-fill hover:scale-[1.01] transition text-5xl" onClick={() => SetCurrentSong('')}></i>
 
-                                    ) : <i className="bi bi-play-fill hover:scale-[1.01] transition text-5xl" onClick={() => SetCurrentSong(song.previewUrl[0])}></i>}
+                                    ) : <i className="bi bi-play-fill hover:scale-[1.01] transition text-5xl" onClick={() => SetCurrentSong(song?.previewUrl[0])}></i>}
 
                                 </div>
                             </div>

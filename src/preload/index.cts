@@ -23,4 +23,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
     onToken: (callback: (token: any) => void) => {
         ipcRenderer.on('token', (_event: any, token: any) => callback(token));
     },
+
+    me: () => ipcRenderer.invoke('me')
 });

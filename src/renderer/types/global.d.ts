@@ -1,5 +1,5 @@
 // global.d.ts
-export {};
+export { };
 
 declare global {
   interface Window {
@@ -11,7 +11,7 @@ declare global {
       logout: () => void
 
       minimizeWindow: () => Promise<any>;
-      closeWindow:  () => Promise<any>
+      closeWindow: () => Promise<any>
 
       getplaylist: () => Promise<any>
       getsongs: (id: string) => Promise<any>
@@ -22,7 +22,10 @@ declare global {
       FetchRecentPLays: () => Promise<any>
       FetchNewReleases: () => Promise<any>
       fetchArtistById: (url: string) => Promise<any>
-      
+
+      onToken: (callback: (token: any) => void) => void;
+
+      me: () => Promise<any>
     };
   }
 }

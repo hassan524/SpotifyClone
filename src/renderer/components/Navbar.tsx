@@ -1,9 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect } from 'react';
+import { useAppContext } from '@/context/context';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { ProfileInfo } = useAppContext();
+  const firstLetter = ProfileInfo?.display_name?.charAt(0).toUpperCase();
+
 
   const [showDropdown, setShowDropdown] = useState(false);
   const profileRef = useRef(null);
@@ -62,7 +66,7 @@ const Navbar = () => {
               className="bg-[#1F1F1F] h-14 w-14 p-2 rounded-full flex items-center justify-center cursor-pointer"
               onClick={() => setShowDropdown(!showDropdown)}
             >
-              <div className="w-full h-full bg-[#FF6437] rounded-full flex items-center justify-center uppercase font-bold text-xl">h</div>
+              <div className="w-full h-full bg-[#FF6437] rounded-full flex items-center justify-center uppercase font-bold text-xl">{firstLetter}</div>
             </div>
 
             {showDropdown && (
