@@ -1,6 +1,6 @@
 # Spoitfy Clone
 
-An Spotify app made with Electron Typescript Vite using SpotifyAPI
+An Spotify app made with Electron Typescript Vite using SpotifyAPI. you can login there and you can see your playlist and play songs..
 
 ## Project Setup
 
