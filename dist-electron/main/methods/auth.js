@@ -2,13 +2,16 @@ import { BrowserWindow, app } from 'electron';
 import fetch from 'node-fetch';
 import path from 'path';
 import Store from 'electron-store';
-let mainWindow = null; // make sure to assign this in your app
+let mainWindow = null; // Your main app window (set from outside)
 let authWindow = null;
 const store = new Store();
 const clientId = process.env.SPOTIFY_CLIENT_ID;
-const redirectUri = 'https://myapp:3000/callback';
-const scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const redirectUri = 'myapp://callback';
+const scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
+export function setMainWindow(win) {
+    mainWindow = win;
+}
 export function loginWithSpotify() {
     const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
     authWindow = new BrowserWindow({
@@ -16,18 +19,51 @@ export function loginWithSpotify() {
         height: 600,
         webPreferences: {
             nodeIntegration: false,
+            contextIsolation: true,
+            sandbox: false,
+            webSecurity: true,
             preload: path.join(app.getAppPath(), 'dist-electron/preload/index.cjs'),
         },
     });
-    authWindow.loadURL(authUrl);
+    // Set user-agent to mimic Chrome to avoid white screen
+    authWindow.webContents.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
+    // Clear cache to avoid stale data issues
+    authWindow.webContents.session.clearCache().then(() => {
+        authWindow?.loadURL(authUrl);
+    });
+    authWindow.webContents.on('will-redirect', (event, url) => {
+        if (url.startsWith(redirectUri)) {
+            event.preventDefault();
+            const urlObj = new URL(url);
+            const code = urlObj.searchParams.get('code');
+            if (code) {
+                exchangeCodeForToken(code)
+                    .then(() => {
+                    if (authWindow) {
+                        authWindow.close();
+                        authWindow = null;
+                    }
+                })
+                    .catch((err) => {
+                    console.error('Token exchange failed:', err);
+                    if (authWindow) {
+                        authWindow.close();
+                        authWindow = null;
+                    }
+                });
+            }
+        }
+    });
+    authWindow.on('closed', () => {
+        authWindow = null;
+    });
 }
-export async function exchangeCodeForToken(_, code) {
+async function exchangeCodeForToken(code) {
     try {
         const res = await fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
-                Authorization: 'Basic ' +
-                    Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
+                Authorization: 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
@@ -46,15 +82,8 @@ export async function exchangeCodeForToken(_, code) {
         throw error;
     }
 }
-export function setMainWindow(win) {
-    mainWindow = win;
-}
-export function closeAuthWindow() {
-    authWindow?.close();
-}
 export async function gettoken() {
-    const token = store.get('token');
-    return token;
+    return store.get('token');
 }
 export async function logout() {
     store.delete('token');

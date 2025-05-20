@@ -1,0 +1,29 @@
+{
+    "appId": "Hassan Spotify App Clone",
+    "productName": "Spotify",
+    "files": [
+      "dist-electron",
+      "dist-react"
+    ],
+    "win": {
+      "target": "nsis",
+       "icon": "resources/icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+       "icon": "resources/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+       "icon": "resources/icon.png"
+    },
+      "extraFiles": [
+  {
+    "from": "./.env",
+    "to": "./.env"
+  }
+]
+
+
+  }
+  
