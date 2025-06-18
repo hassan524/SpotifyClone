@@ -28,6 +28,9 @@ $ npm run dist:mac
 # For Linux
 $ npm run dist:linux
 ```
-<img src="https://github.com/user-attachments/assets/e5857b1a-47d2-4f4b-92ae-31907a4f4e46" width="300" height="190" />
+## Preview
 
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/e5857b1a-47d2-4f4b-92ae-31907a4f4e46" width="300" style="margin-right: 10px; border-radius: 8px;" />
+  <img src="https://github.com/user-attachments/assets/7f209d0c-00fa-42ef-bca8-f42850d1abc4" width="300" style="border-radius: 8px;" />
+</div>
