@@ -29,4 +29,4 @@ $ npm run dist:mac
 $ npm run dist:linux
 ```
 
-![1747761850397](https://github.com/user-attachments/assets/e5857b1a-47d2-4f4b-92ae-31907a4f4e46)
+![1747761850397](https://github.com/user-attachments/assets/e5857b1a-47d2-4f4b-92ae-31907a4f4e46 =100x20)
