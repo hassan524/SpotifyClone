@@ -3,6 +3,7 @@ import { app, BrowserWindow, screen, session } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
 import { initializeIpcHandlers } from './IpcHandlers.js';
+
 function CreateMainWindow() {
   const scaleFactor = screen.getPrimaryDisplay().scaleFactor;
   console.log('DPI Scale Factor:', scaleFactor);
