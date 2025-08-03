@@ -15,7 +15,6 @@ function App() {
   const { Token } = useAppContext();
 
     React.useEffect(() => {
-      console.log('here token bud', Token)
     if (Token) {
       navigate('/');
     }
