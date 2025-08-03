@@ -30,7 +30,7 @@ function App() {
           <Route path='/playlist/:id' element={<Playlists />} />
           
         </Route>
-
+        
         <Route
           path="/auth"
           element={Token ? <Navigate to="/" replace /> : <Login />}
