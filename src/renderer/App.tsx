@@ -35,7 +35,7 @@ function App() {
           path="/auth"
           element={Token ? <Navigate to="/" replace /> : <Login />}
         />
-
+        
         <Route path="/callback" element={<Callback />} />
       </Routes>
   );
